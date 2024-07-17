@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_health_app/shared/custom_app_bar.dart';
+import 'package:time_picker_wheel/time_picker_wheel.dart';
 
 class Alarms extends StatefulWidget {
   const Alarms({super.key});
@@ -9,9 +10,6 @@ class Alarms extends StatefulWidget {
 }
 
 class _Alarms extends State<Alarms> {
-  final entryTimeController =
-      TextEditingController(text: _formatTime(TimeOfDay.now()));
-
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar("HealthApp"),
@@ -20,21 +18,6 @@ class _Alarms extends State<Alarms> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            TextField(
-              controller: entryTimeController,
-              readOnly: true,
-              decoration: InputDecoration(
-                border: const OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20))),
-                suffixIcon: IconButton(
-                    icon: const Icon(
-                      Icons.schedule,
-                    ),
-                    onPressed: () async {
-                      entryTimeController.text = await showTimeDialog();
-                    }),
-              ),
-            ),
             const SizedBox(height: 16),
             Row(
               children: [
@@ -42,6 +25,29 @@ class _Alarms extends State<Alarms> {
                   child: Form(
                     child: Column(
                       children: [
+                        TimePicker(
+                          onChange: (timeOfDay) {},
+                          options: TimePickerOptions.byDefault(
+                            height: 154,
+                            itemExtent: 30,
+                            diameterRatio: 1,
+                            selectedRowHeight: 50,
+                            fontOpacity: 1,
+                            fontColor: const Color.fromARGB(255, 0, 0, 0),
+                            labelSize: 25,
+                            numberSize: 25,
+                            amPmSize: 15,
+                            amPmWidth: 25,
+                            wheelWidth: 50,
+                            selectedRowHorizontalPadding: double.maxFinite,
+                            selectedRowHorizontalBorderRadius: 1,
+                            selectedRowBackgroundColor: Color(4292207863),
+                            selectedRowForegroundColor: Color(4281361036),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 32,
+                        ),
                         TextFormField(
                           decoration: const InputDecoration(
                             label: Text("Nome do remédio"),
@@ -97,23 +103,4 @@ class _Alarms extends State<Alarms> {
       ),
     );
   }
-
-  Future<String> showTimeDialog() async {
-    final time = await showTimePicker(
-      context: context,
-      initialTime: TimeOfDay.now(),
-      initialEntryMode: TimePickerEntryMode.input,
-      builder: (context, child) {
-        return MediaQuery(
-          data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
-          child: child!,
-        );
-      },
-    );
-
-    return _formatTime(time!);
-  }
 }
-
-String _formatTime(TimeOfDay time) =>
-    "${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}";
