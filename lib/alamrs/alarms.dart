@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_health_app/shared/custom_app_bar.dart';
+import 'package:projeto_health_app/shared/custom_time.dart';
 import 'package:time_picker_wheel/time_picker_wheel.dart';
 
 class Alarms extends StatefulWidget {
@@ -25,35 +26,29 @@ class _Alarms extends State<Alarms> {
                   child: Form(
                     child: Column(
                       children: [
-                        TimePicker(
-                          onChange: (timeOfDay) {},
-                          options: TimePickerOptions.byDefault(
-                            height: 154,
-                            itemExtent: 30,
-                            diameterRatio: 1,
-                            selectedRowHeight: 50,
-                            fontOpacity: 1,
-                            fontColor: const Color.fromARGB(255, 0, 0, 0),
-                            labelSize: 25,
-                            numberSize: 25,
-                            amPmSize: 15,
-                            amPmWidth: 25,
-                            wheelWidth: 50,
-                            selectedRowHorizontalPadding: double.maxFinite,
-                            selectedRowHorizontalBorderRadius: 1,
-                            selectedRowBackgroundColor: Color(4292207863),
-                            selectedRowForegroundColor: Color(4281361036),
-                          ),
+                        Container(
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.black, width: 3),
+                              borderRadius: BorderRadius.circular(10)),
+                          margin: EdgeInsets.all(10),
+                          child: CustomTime(),
                         ),
                         SizedBox(
                           height: 32,
                         ),
-                        TextFormField(
-                          decoration: const InputDecoration(
-                            label: Text("Nome do remédio"),
-                            border: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20))),
+                        Container(
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.black, width: 3),
+                              borderRadius: BorderRadius.circular(10)),
+                          margin: EdgeInsets.fromLTRB(10, 6, 10, 0),
+                          child: TextFormField(
+                            decoration: const InputDecoration(
+                              border: InputBorder.none,
+                              label: Text(
+                                "Nome do remédio",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
                           ),
                         )
                       ],
@@ -62,7 +57,6 @@ class _Alarms extends State<Alarms> {
                 )
               ],
             ),
-            const SizedBox(height: 160),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

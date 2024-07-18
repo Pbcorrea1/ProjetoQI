@@ -4,11 +4,13 @@ publish_to: 'none'
 version: 0.1.0
 
 environment:
-  sdk: '>=3.4.1 <4.0.0'
+  sdk: '>=3.3.0 <4.0.0'
 
-dependencies:
+dependencies:  
   flutter:
     sdk: flutter
+  time_picker_wheel: ^0.1.1
+  
 
 dev_dependencies:
   flutter_test:
