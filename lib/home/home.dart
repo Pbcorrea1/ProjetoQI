@@ -38,10 +38,13 @@ class Home extends StatelessWidget {
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(14)))),
                             iconColor: WidgetStatePropertyAll(Colors.white),
-                            backgroundColor: WidgetStatePropertyAll(
+                            backgroundColor:  WidgetStatePropertyAll(
                                 Color.fromRGBO(0, 29, 50, 1))),
                         itemBuilder: (Context) =>
-                            [const PopupMenuItem(child: Text("Configurações"))])
+                            [ PopupMenuItem(child: Text("Configurações"),onTap: () {
+                              Navigator.pushNamed(context, 'configurations');
+                            },)
+                            ])
                   ],
                 ),
               )),

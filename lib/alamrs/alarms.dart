@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_health_app/shared/custom_app_bar.dart';
 import 'package:projeto_health_app/shared/custom_time.dart';
-import 'package:time_picker_wheel/time_picker_wheel.dart';
 
 class Alarms extends StatefulWidget {
   const Alarms({super.key});
@@ -16,12 +15,11 @@ class _Alarms extends State<Alarms> {
       appBar: customAppBar("HealthApp"),
       backgroundColor: Color.fromRGBO(213, 228, 247, 1),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(6.0),
         child: Column(
-          children: [
-            const SizedBox(height: 16),
-            Row(
-              children: [
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(children: [
                 Expanded(
                   child: Form(
                     child: Column(
@@ -54,46 +52,46 @@ class _Alarms extends State<Alarms> {
                       ],
                     ),
                   ),
-                )
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Actions(
-                    actions: {},
-                    child: ElevatedButton(
-                      onPressed: () {
-                        {
-                          Navigator.pushNamed(context, 'home');
-                        }
-                      },
-                      child: Text(
-                        "Cancelar",
-                        style: TextStyle(color: Color.fromRGBO(47, 98, 140, 1)),
-                      ),
-                      style:
-                          ElevatedButton.styleFrom(minimumSize: Size(168, 35)),
-                    )),
-                Actions(
-                    actions: {},
-                    child: ElevatedButton(
-                      onPressed: () {
-                        {
-                          Navigator.pushNamed(context, 'home');
-                        }
-                      },
-                      child: Text(
-                        "Salvar",
-                        style: TextStyle(color: Color.fromRGBO(47, 98, 140, 1)),
-                      ),
-                      style:
-                          ElevatedButton.styleFrom(minimumSize: Size(168, 35)),
-                    )),
-              ],
-            )
-          ],
-        ),
+                ),
+              ]),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Actions(
+                      actions: {},
+                      child: ElevatedButton(
+                        onPressed: () {
+                          {
+                            Navigator.pushNamed(context, 'home');
+                          }
+                        },
+                        child: Text(
+                          "Cancelar",
+                          style:
+                              TextStyle(color: Color.fromRGBO(47, 98, 140, 1)),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                            minimumSize: Size(168, 35)),
+                      )),
+                  Actions(
+                      actions: {},
+                      child: ElevatedButton(
+                        onPressed: () {
+                          {
+                            Navigator.pushNamed(context, 'home');
+                          }
+                        },
+                        child: Text(
+                          "Salvar",
+                          style:
+                              TextStyle(color: Color.fromRGBO(47, 98, 140, 1)),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                            minimumSize: Size(168, 35)),
+                      )),
+                ],
+              )
+            ]),
       ),
     );
   }
