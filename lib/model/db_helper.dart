@@ -3,7 +3,7 @@ import 'package:sqflite/sqflite.dart';
 class DbHelper {
   static Future<Database> openConnection() async {
     var path = await getDatabasesPath();
-    var dbName = 'parking_database.db';
+    var dbName = 'alarm_database.db';
     var dbPath = '$path$dbName';
     return await openDatabase(
       dbPath,

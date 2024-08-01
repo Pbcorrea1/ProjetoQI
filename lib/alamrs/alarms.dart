@@ -1,6 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:projeto_health_app/model/alarm.dart';
 import 'package:projeto_health_app/shared/custom_app_bar.dart';
-import 'package:projeto_health_app/shared/custom_time.dart';
+import 'package:projeto_health_app/shared/custom_time_picker.dart';
+import 'package:time_picker_wheel/time_picker_wheel.dart';
 
 class Alarms extends StatefulWidget {
   const Alarms({super.key});
@@ -10,6 +14,9 @@ class Alarms extends StatefulWidget {
 }
 
 class _Alarms extends State<Alarms> {
+  late String hora;
+  final medication = TextEditingController();
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar("HealthApp"),
@@ -29,7 +36,14 @@ class _Alarms extends State<Alarms> {
                               border: Border.all(color: Colors.black, width: 3),
                               borderRadius: BorderRadius.circular(10)),
                           margin: EdgeInsets.all(10),
-                          child: CustomTime(),
+                          child: TimePicker(
+                            onChange: (timeOfDay) {
+                              setState(() {
+                                hora = getFormatedTimeFromTimeOfDay(timeOfDay);
+                              });
+                            },
+                            options: customTimePicker(),
+                          ),
                         ),
                         SizedBox(
                           height: 32,
@@ -40,6 +54,7 @@ class _Alarms extends State<Alarms> {
                               borderRadius: BorderRadius.circular(10)),
                           margin: EdgeInsets.fromLTRB(10, 6, 10, 0),
                           child: TextFormField(
+                            controller: medication,
                             decoration: const InputDecoration(
                               border: InputBorder.none,
                               label: Text(
@@ -76,10 +91,8 @@ class _Alarms extends State<Alarms> {
                   Actions(
                       actions: {},
                       child: ElevatedButton(
-                        onPressed: () {
-                          {
-                            Navigator.pushNamed(context, 'home');
-                          }
+                        onPressed: () async {
+                          saveAlarm();
                         },
                         child: Text(
                           "Salvar",
@@ -94,5 +107,21 @@ class _Alarms extends State<Alarms> {
             ]),
       ),
     );
+  }
+
+  String getFormatedTimeFromTimeOfDay(TimeOfDay timeOfDay) {
+    final hour = timeOfDay.hourOfPeriod.toString().padLeft(2, '0');
+    final minute = timeOfDay.minute.toString().padLeft(2, '0');
+    final period = timeOfDay.period.name.toUpperCase();
+
+    String time = '$hour:$minute $period';
+
+    log(time);
+
+    return time;
+  }
+
+  void saveAlarm() async {
+    final alarm = Alarm(alarmHour: hora, medicationName: medication.text);
   }
 }

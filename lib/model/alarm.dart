@@ -12,6 +12,7 @@ class Alarm {
       };
 
   factory Alarm.fromMap(Map<String, Object?> map) => Alarm(
-      alarmHour: 'alarmHour' as String,
-      medicationName: 'medicationName' as String);
+      alarmHour: 'alarmHour' ,
+      medicationName: 'medicationName' );
+      
 }
