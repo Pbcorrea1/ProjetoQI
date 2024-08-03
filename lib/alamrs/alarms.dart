@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:projeto_health_app/model/alarm.dart';
+import 'package:projeto_health_app/repository/alarm_repository.dart';
 import 'package:projeto_health_app/shared/custom_app_bar.dart';
 import 'package:projeto_health_app/shared/custom_time_picker.dart';
 import 'package:time_picker_wheel/time_picker_wheel.dart';
@@ -16,6 +17,7 @@ class Alarms extends StatefulWidget {
 class _Alarms extends State<Alarms> {
   late String hora;
   final medication = TextEditingController();
+  final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,6 +31,7 @@ class _Alarms extends State<Alarms> {
               Row(children: [
                 Expanded(
                   child: Form(
+                    key: formKey,
                     child: Column(
                       children: [
                         Container(
@@ -112,9 +115,8 @@ class _Alarms extends State<Alarms> {
   String getFormatedTimeFromTimeOfDay(TimeOfDay timeOfDay) {
     final hour = timeOfDay.hourOfPeriod.toString().padLeft(2, '0');
     final minute = timeOfDay.minute.toString().padLeft(2, '0');
-    final period = timeOfDay.period.name.toUpperCase();
 
-    String time = '$hour:$minute $period';
+    String time = '$hour:$minute';
 
     log(time);
 
@@ -123,5 +125,18 @@ class _Alarms extends State<Alarms> {
 
   void saveAlarm() async {
     final alarm = Alarm(alarmHour: hora, medicationName: medication.text);
+    try {
+      final id = await AlarmRepository.insert(alarm);
+      var snackBar = null;
+      if (id > 0) {
+        snackBar =
+            SnackBar(content: Text('O alarme n $id foi salvo com sucesso'));
+      } else {
+        snackBar = const SnackBar(content: Text('Erro, favor verificar!!!'));
+      }
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } catch (error) {
+      print(error);
+    }
   }
 }
