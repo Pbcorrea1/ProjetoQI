@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:timezone/timezone.dart' as tz;
+
 import 'package:timezone/timezone.dart' as tz;
 
 class Notifications extends StatefulWidget {
@@ -32,7 +32,7 @@ class _NotificationsState extends State<Notifications> {
       'Alarme',
       'É hora do alarme!',
       tz.TZDateTime.now(tz.getLocation('America/Sao_Paulo'))
-          .add(Duration(seconds: 10)),
+          .add(const Duration(seconds: 10)),
       platformChannelSpecifics,
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
@@ -44,7 +44,7 @@ class _NotificationsState extends State<Notifications> {
     return Center(
       child: ElevatedButton(
         onPressed: _scheduleAlarm,
-        child: Text('Agendar Alarme'),
+        child: const Text('Agendar Alarme'),
       ),
     );
   }

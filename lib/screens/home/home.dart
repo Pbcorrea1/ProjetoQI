@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projeto_health_app/home/components/new_alarm.dart';
+import 'package:projeto_health_app/screens/home/components/new_alarm.dart';
 import 'package:projeto_health_app/repository/alarm_repository.dart';
 import 'package:projeto_health_app/shared/custom_app_bar.dart';
 

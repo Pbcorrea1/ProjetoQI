@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:projeto_health_app/home/home.dart';
+import 'package:projeto_health_app/screens/home/home.dart';
 import 'package:projeto_health_app/model/alarm.dart';
 import 'package:projeto_health_app/repository/alarm_repository.dart';
 import 'package:projeto_health_app/shared/custom_app_bar.dart';
@@ -12,7 +12,6 @@ class Alarms extends StatefulWidget {
   const Alarms({super.key});
   @override
   State<Alarms> createState() => _Alarms();
-  // TODO: implement createState
 }
 
 class _Alarms extends State<Alarms> {
@@ -23,9 +22,9 @@ class _Alarms extends State<Alarms> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar("HealthApp"),
-      backgroundColor: Color.fromRGBO(213, 228, 247, 1),
+      backgroundColor: const Color.fromRGBO(213, 228, 247, 1),
       body: Padding(
-        padding: const EdgeInsets.all(6.0),
+        padding: const EdgeInsets.all(10.0),
         child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -39,7 +38,7 @@ class _Alarms extends State<Alarms> {
                           decoration: BoxDecoration(
                               border: Border.all(color: Colors.black, width: 3),
                               borderRadius: BorderRadius.circular(10)),
-                          margin: EdgeInsets.all(10),
+                          margin: const EdgeInsets.all(10),
                           child: TimePicker(
                             onChange: (timeOfDay) {
                               setState(() {
@@ -49,16 +48,14 @@ class _Alarms extends State<Alarms> {
                             options: customTimePicker(),
                           ),
                         ),
-                        SizedBox(
-                          height: 32,
-                        ),
                         Container(
+                          padding: const EdgeInsets.all(6),
                           decoration: BoxDecoration(
                               border: Border.all(color: Colors.black, width: 3),
                               borderRadius: BorderRadius.circular(10)),
-                          margin: EdgeInsets.fromLTRB(10, 6, 10, 0),
+                          margin: const EdgeInsets.fromLTRB(10, 6, 10, 0),
                           child: TextFormField(
-                            validator: (value) => (value == null)
+                            validator: (value) => (value == "")
                                 ? 'Insira o nome do remédio!!'
                                 : null,
                             controller: medication,
@@ -80,41 +77,41 @@ class _Alarms extends State<Alarms> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Actions(
-                      actions: {},
+                      actions: const {},
                       child: ElevatedButton(
                         onPressed: () {
                           {
                             Navigator.pushNamed(context, 'home');
                           }
                         },
-                        child: Text(
+                        style: ElevatedButton.styleFrom(
+                            minimumSize:const Size(168, 35)),
+                        child: const Text(
                           "Cancelar",
                           style:
                               TextStyle(color: Color.fromRGBO(47, 98, 140, 1)),
                         ),
-                        style: ElevatedButton.styleFrom(
-                            minimumSize: Size(168, 35)),
                       )),
                   Actions(
-                      actions: {},
+                      actions: const {},
                       child: ElevatedButton(
                         onPressed: () async {
-                          Navigator.of(context).pushAndRemoveUntil(
-                            MaterialPageRoute(builder: (context) => Home()),
-                            ModalRoute.withName(
-                                '/'), // Remove todas as páginas até a página inicial
-                          );
                           if (formKey.currentState!.validate()) {
                             saveAlarm();
+                            Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(builder: (context) =>const Home()),
+                              ModalRoute.withName(
+                                  '/'), // Remove todas as páginas até a página inicial
+                            );
                           }
                         },
-                        child: Text(
+                        style: ElevatedButton.styleFrom(
+                            minimumSize: const Size(168, 35)),
+                        child: const Text(
                           "Salvar",
                           style:
-                              TextStyle(color: Color.fromRGBO(47, 98, 140, 1)),
+                               TextStyle(color: Color.fromRGBO(47, 98, 140, 1)),
                         ),
-                        style: ElevatedButton.styleFrom(
-                            minimumSize: Size(168, 35)),
                       )),
                 ],
               )
@@ -140,7 +137,7 @@ class _Alarms extends State<Alarms> {
       final id = await AlarmRepository.insert(alarm);
       var snackBar = null;
       if (id > 0) {
-        snackBar = SnackBar(content: Text('Alarme salvo com sucesso!!!'));
+        snackBar = const SnackBar(content: Text('Alarme salvo com sucesso!!!'));
       } else {
         snackBar = const SnackBar(content: Text('Erro, favor verificar!!!'));
       }

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:projeto_health_app/alamrs/alarms.dart';
-import 'package:projeto_health_app/configurations/configurations.dart';
-import 'package:projeto_health_app/home/home.dart';
+import 'package:projeto_health_app/screens/alamrs/alarm_register.dart';
+import 'package:projeto_health_app/screens/configurations/configurations.dart';
+import 'package:projeto_health_app/screens/home/home.dart';
 import 'package:projeto_health_app/notification/notifications.dart';
 import 'package:projeto_health_app/theme.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
-import 'package:timezone/timezone.dart' as tz;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,8 +27,8 @@ void main() async {
   runApp(MaterialApp(
     initialRoute: 'home',
     routes: {
-      'home': (context) => Home(),
-      'alarms': (context) => Alarms(),
+      'home': (context) => const Home(),
+      'alarms': (context) => const Alarms(),
       'configurations': (context) => Configurations(),
       'notifications': (context) => Notifications(),
     },
@@ -37,7 +36,7 @@ void main() async {
       colorScheme: MaterialTheme.lightScheme(),
     ),
     darkTheme: ThemeData(
-      colorScheme: ColorScheme.dark(),
+      colorScheme: const ColorScheme.dark(),
     ),
   ));
 }
