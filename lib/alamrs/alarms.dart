@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:projeto_health_app/home/home.dart';
 import 'package:projeto_health_app/model/alarm.dart';
 import 'package:projeto_health_app/repository/alarm_repository.dart';
 import 'package:projeto_health_app/shared/custom_app_bar.dart';
@@ -57,6 +58,9 @@ class _Alarms extends State<Alarms> {
                               borderRadius: BorderRadius.circular(10)),
                           margin: EdgeInsets.fromLTRB(10, 6, 10, 0),
                           child: TextFormField(
+                            validator: (value) => (value == null)
+                                ? 'Insira o nome do remédio!!'
+                                : null,
                             controller: medication,
                             decoration: const InputDecoration(
                               border: InputBorder.none,
@@ -95,7 +99,14 @@ class _Alarms extends State<Alarms> {
                       actions: {},
                       child: ElevatedButton(
                         onPressed: () async {
-                          saveAlarm();
+                          Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(builder: (context) => Home()),
+                            ModalRoute.withName(
+                                '/'), // Remove todas as páginas até a página inicial
+                          );
+                          if (formKey.currentState!.validate()) {
+                            saveAlarm();
+                          }
                         },
                         child: Text(
                           "Salvar",
@@ -129,8 +140,7 @@ class _Alarms extends State<Alarms> {
       final id = await AlarmRepository.insert(alarm);
       var snackBar = null;
       if (id > 0) {
-        snackBar =
-            SnackBar(content: Text('O alarme n $id foi salvo com sucesso'));
+        snackBar = SnackBar(content: Text('Alarme salvo com sucesso!!!'));
       } else {
         snackBar = const SnackBar(content: Text('Erro, favor verificar!!!'));
       }

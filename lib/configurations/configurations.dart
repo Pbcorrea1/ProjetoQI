@@ -16,6 +16,7 @@ class _ConfigurationsState extends State<Configurations> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromRGBO(213, 228, 247, 1),
       appBar: customAppBar('Configurações'),
       body: Padding(
         padding: const EdgeInsets.all(16),

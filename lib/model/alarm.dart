@@ -12,7 +12,7 @@ class Alarm {
       };
 
   factory Alarm.fromMap(Map<String, Object?> map) => Alarm(
-      number: map['number'] as int,
+      number: map['number'] as int?,
       alarmHour: map['alarmHour'] as String,
       medicationName: map['medicationName'] as String);
 }

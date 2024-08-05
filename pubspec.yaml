@@ -11,6 +11,8 @@ dependencies:
     sdk: flutter
   sqflite: ^2.3.3+1
   time_picker_wheel: ^0.1.1
+  flutter_local_notifications: ^14.0.0
+  timezone: ^0.9.4
   
 
 dev_dependencies:

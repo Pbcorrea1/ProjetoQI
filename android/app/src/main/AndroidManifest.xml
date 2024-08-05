@@ -1,5 +1,27 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
+        android:allowBackup="true"
+        android:label="yourapp"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:supportsRtl="true"
+        android:theme="@style/LaunchTheme">
+
+        <service android:name="me.carda.flutter_local_notifications.services.NotificationService"
+                 android:permission="android.permission.BIND_JOB_SERVICE" />
+        
+        <!-- Configura o NotificationChannel para Android 8.0 e acima -->
+        <receiver android:name="me.carda.flutter_local_notifications.receivers.NotificationReceiver"
+                  android:exported="true"
+                  android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Outros elementos -->
+    </application>
+    <application
         android:label="projeto_health_app"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">

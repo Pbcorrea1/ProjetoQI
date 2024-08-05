@@ -77,31 +77,29 @@ class _HomeState extends State<Home> {
                   }
                   if (!snapshot.hasData || snapshot.data!.isEmpty) {
                     return const Center(
-                      child: Text('Nao existe dados'),
+                      child: Padding(
+                        padding: EdgeInsets.all(100),
+                        child: Text('Não existem dados'),
+                      ),
                     );
                   }
                   var listaDeAlarmes = snapshot.data!;
                   return RefreshIndicator(
-                      onRefresh: () async {
-                        listaDeAlarmes = await AlarmRepository.findAll();
-                        setState(() {});
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.all(10),
-                        child:
-                            Column(mainAxisSize: MainAxisSize.min, children: [
-                          Container(
-                            height: 300,
-                            child: Expanded(
-                                child: ListView.builder(
-                              scrollDirection: Axis.vertical,
-                              itemCount: listaDeAlarmes.length,
-                              itemBuilder: (context, index) => NewAlarm(
-                                  alarm: listaDeAlarmes[index], index: index),
-                            )),
-                          )
-                        ]),
-                      ));
+                    onRefresh: () async {
+                      listaDeAlarmes = await AlarmRepository.findAll();
+                      setState(() {});
+                    },
+                    child: Row(mainAxisSize: MainAxisSize.min, children: [
+                      Expanded(
+                          child: ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        itemCount: listaDeAlarmes.length,
+                        itemBuilder: (context, index) => NewAlarm(
+                            alarm: listaDeAlarmes[index], index: index),
+                      )),
+                    ]),
+                  );
                 }),
           ],
         ));

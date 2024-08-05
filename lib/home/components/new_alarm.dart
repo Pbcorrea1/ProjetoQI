@@ -23,7 +23,15 @@ class NewAlarm extends StatelessWidget {
       },
       direction: DismissDirection.endToStart,
       background: Container(
-        color: Colors.amber,
+        margin: EdgeInsets.all(15),
+        alignment: Alignment.topRight,
+        child: const Padding(
+          padding:  EdgeInsets.all(10.0),
+          child: Icon(
+            Icons.delete,
+          ),
+        ),
+        color: Colors.red,
       ),
       key: Key(alarm.number.toString()),
       child: Padding(
